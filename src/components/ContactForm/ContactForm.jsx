@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+
+import { ToastContainer } from 'react-toastify';
 
 import { Form, Label, Input, Button } from './ContactForm.styled';
 
@@ -14,8 +18,12 @@ const ContactForm = ({ contacts, handleNewContact }) => {
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
+    // if (duplicateName) {
+    //   alert(`${name} is already in contacts.`);
+    //   return;
+    // }
     if (duplicateName) {
-      alert(`${name} is already in contacts.`);
+      toast.error(`${name} is already in contacts.`);
       return;
     }
 
@@ -70,6 +78,8 @@ const ContactForm = ({ contacts, handleNewContact }) => {
         />
       </Label>
       <Button type="submit">Add contact</Button>
+      <ToastContainer autoClose={1000} />
+
       <h3>Find contacts by name</h3>
     </Form>
   );
